@@ -23,3 +23,37 @@ En el presente analisis se utiliza el set de vinos de calidad de vinos blancos, 
 * Sulphates: se expresan en g (sulfato de potasio) / dm3.
 * Alcohol: Porcentaje que se expresa en % vol.
 * Quality: los expertos en vino calificaron la calidad del vino entre 0 (muy mal) y 10 (excelente). El número final es la mediana de al menos tres evaluaciones hechas por esos mismos expertos en vinos.
+
+## Instalación de nodejs para publicación de servicios en Red Hat
+```
+sudo yum update
+sudo yum install nodejs npm
+```
+
+## Instalación de pm2 para publicación del servicio
+```
+sudo npm install -g pm2
+```
+
+## Registro del servicio en pm2
+```
+pm2 start --interpreter="Rscript" Rscript d:/Aplicaciones/R/wine-quality/winequality-plumber.R
+```
+
+## Listado de servicios de pm2
+```
+pm2 list
+```
+
+## Detener el servicio de pm2
+```
+pm2 stop winequality-plumber
+```
+
+## Iniciar el servicio de pm2
+```
+pm2 start winequality-plumber
+```
+
+## Ejemplo consumo del servicio
+[Ejecutar Ejemplo](http://127.0.0.1:10080/quality?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8)

@@ -1,5 +1,6 @@
 # Working Directory
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("d:/Aplicaciones/R/wine-quality/")
 
 # Cargamos el modelo entrenado como una variable global
 load(file='winequality-model.RData')

@@ -1,5 +1,6 @@
 # Working Directory
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("d:/Aplicaciones/R/wine-quality/")
 
 # Exploración
 
