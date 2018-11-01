@@ -56,4 +56,5 @@ pm2 start winequality-plumber
 ```
 
 ## Ejemplo consumo del servicio
-* [Ejecutar Ejemplo](http://127.0.0.1:10080/quality?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8)
+* [Trainer](http://127.0.0.1:10080/quality-train)
+* [Predict](http://127.0.0.1:10080/quality-predict?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8)

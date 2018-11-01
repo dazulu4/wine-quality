@@ -5,6 +5,13 @@ setwd("d:/Aplicaciones/R/wine-quality/")
 # Cargamos el modelo entrenado como una variable global
 load(file='winequality-model.RData')
 
+#' Servicio de entrenamiento calidad de vinos
+#' @get /quality-train
+function(){
+  source('winequality-predict.R', encoding = 'UTF-8')
+  return(accuracy)
+}
+
 #' Servicio de prediccion calidad de vinos
 #' @param fixed.acidity
 #' @param volatile.acidity
@@ -17,7 +24,7 @@ load(file='winequality-model.RData')
 #' @param pH
 #' @param sulphates
 #' @param alcohol
-#' @get /quality
+#' @get /quality-predict
 function(fixed.acidity=0, volatile.acidity=0,
          citric.acid=0, residual.sugar=0,
          chlorides=0, free.sulfur.dioxide=0,

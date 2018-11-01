@@ -6,9 +6,8 @@ setwd("d:/Aplicaciones/R/wine-quality/")
 
 ## Carga y verificación de los datos
 wine <- read.csv("winequality-white.csv", sep = ";")
-str(wine)
 
-hist(wine$quality)
+# hist(wine$quality)
 
 # Metodología
 
@@ -19,6 +18,9 @@ hist(wine$quality)
 ##
 wine_train <- wine[1:3750, ]
 wine_test <- wine[3751:4898, ]
+
+#wine_train$quality <- as.factor(wine_train$quality)
+#wine_test$quality <- as.factor(wine_test$quality)
 
 ##
 ## Se estima un árbol de regresión
@@ -36,14 +38,14 @@ m.rpart
 summary(m.rpart)
 
 ## install.packages("rpart.plot")
-library(rpart.plot)
-rpart.plot(m.rpart, digits = 3)
+#library(rpart.plot)
+#rpart.plot(m.rpart, digits = 3)
 
-rpart.plot(m.rpart,
-           digits = 4,
-           fallen.leaves = TRUE,
-           type = 3,
-           extra = 101)
+#rpart.plot(m.rpart,
+#           digits = 4,
+#           fallen.leaves = TRUE,
+#           type = 3,
+#           extra = 101)
 
 # Evaluación del modelo
 
@@ -80,7 +82,11 @@ mean(wine_train$quality)
 ## Valor esperado para el MAE respecto
 ## a los datos
 ##
-MAE(5.89, wine_test$quality)
+MAE(5.886933, wine_test$quality)
+
+##
+## Guardamos el accuracy del modelo
+accuracy <<- MAE(p.rpart, wine_test$quality)
 
 # Guardamos el modelo entrenado
 save(m.rpart, file='winequality-model.RData')
