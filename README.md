@@ -89,13 +89,15 @@ Realiza la predicción de la calidad de un vino según las características de p
 ```
 
 Finalmente, se presenta el resultado del servicio para predicción de dos ejemplos de prueba. Los valores resultado corresponden a un número entre 1 y 10 que representa la calidad de los vinos:
+```
 [
     5.4632,
     4.9945
 ]
+```
 
 ## Despliegue del servicio predictivo
-A continuacion se presentará un ejemplo de despliegue o publicación del servicio predictivo en lenguaje R utilizando un servidor local (máquina del usuario) que permite intuir como será el comportamiento del servicio en un ambiente configurado, por tanto, se utilizará el servidor de aplicaciones **NodeJS** con el complemento **PM2** para la ejecución de componentes en lenguaje R. Las siguientes son las instrucciones para la instalación del servidor de aplicaciones y los elementos requeridos en el proceso de despliegue.
+A continuacion se presentará un ejemplo de despliegue o publicación del servicio predictivo en lenguaje R utilizando un servidor local (en la máquina del usuario) que permite intuir como será el comportamiento del servicio en un ambiente similar al productivo, por tanto, se utilizará el servidor de aplicaciones **NodeJS** con el complemento **PM2** para la ejecución de componentes en lenguaje R. Las siguientes son las instrucciones para la instalación del servidor de aplicaciones y los elementos requeridos en el proceso de despliegue.
 
 ### Instalación de NodeJS para publicación del servicio
 ```
@@ -131,4 +133,4 @@ pm2 start winequality-plumber
 ```
 
 ## Ejemplos consumo del servicio predictivo
-El archivo [winequality-postman.json](https://github.com/dazulu4/wine-quality/blob/master/winequality-postman.json) contiene ejemplos para el consumo de los endpoints publicados con la URL de la máquina local con el fin de que pueda realizar pruebas de los mismos. Debe instalar la herramienta [Postman](https://www.getpostman.com/downloads/) e importar el archivo indicado para ver el ejemplo de consumo de los 3 servicios publicados.
+El archivo [winequality-postman.json](https://github.com/dazulu4/wine-quality/blob/master/winequality-postman.json) contiene ejemplos para el consumo de los endpoints con el fin de que pueda realizar pruebas de los mismos. Debe instalar la herramienta [Postman](https://www.getpostman.com/downloads/) e importar el archivo indicado para ejecutar el ejemplo de consumo de los 3 servicios publicados.
