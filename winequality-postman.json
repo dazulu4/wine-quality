@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "e3a4586b-167a-4dc2-a360-d1881db598e1",
+		"name": "Plumber",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "winequality-train",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:10080/train",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "10080",
+					"path": [
+						"train"
+					],
+					"query": [
+						{
+							"key": "clave",
+							"value": "valor",
+							"disabled": true
+						},
+						{
+							"key": "otra",
+							"value": "otro",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "winequality-predict",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:10080/predict?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "10080",
+					"path": [
+						"predict"
+					],
+					"query": [
+						{
+							"key": "fixed.acidity",
+							"value": "0"
+						},
+						{
+							"key": "volatile.acidity",
+							"value": "0.27"
+						},
+						{
+							"key": "citric.acid",
+							"value": "0.15"
+						},
+						{
+							"key": "residual.sugar",
+							"value": "12.5"
+						},
+						{
+							"key": "chlorides",
+							"value": "0.045"
+						},
+						{
+							"key": "free.sulfur.dioxide",
+							"value": "2"
+						},
+						{
+							"key": "total.sulfur.dioxide",
+							"value": "54"
+						},
+						{
+							"key": "density",
+							"value": "0.001"
+						},
+						{
+							"key": "pH",
+							"value": "1"
+						},
+						{
+							"key": "sulphates",
+							"value": "0.01"
+						},
+						{
+							"key": "alcohol",
+							"value": "3.8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "winequality-predict-post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"fixed.acidity\": 0,\n        \"volatile.acidity\": 0.27,\n        \"citric.acid\": 0.15,\n        \"residual.sugar\": 12.5,\n        \"chlorides\": 0.045,\n        \"free.sulfur.dioxide\": 2,\n        \"total.sulfur.dioxide\": 54,\n        \"density\": 0.001,\n        \"pH\": 1,\n        \"sulphates\": 0.01,\n        \"alcohol\": 3.8\n    },\n    {\n        \"fixed.acidity\": 0.1,\n        \"volatile.acidity\": 1.5,\n        \"citric.acid\": 0.05,\n        \"residual.sugar\": 1.5,\n        \"chlorides\": 1.45,\n        \"free.sulfur.dioxide\": 6,\n        \"total.sulfur.dioxide\": 10,\n        \"density\": 0.1,\n        \"pH\": 0.5,\n        \"sulphates\": 0.02,\n        \"alcohol\": 1.9\n    }\n]"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:10080/predict-post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "10080",
+					"path": [
+						"predict-post"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

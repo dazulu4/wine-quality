@@ -1,15 +1,14 @@
 # Working Directory
-# setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 setwd("d:/Aplicaciones/R/wine-quality/")
 
-# Exploración
+# Exploracion
 
 ## Carga y verificación de los datos
 wine <- read.csv("winequality-white.csv", sep = ";")
 
 # hist(wine$quality)
 
-# Metodología
+# Metodologia
 
 # Entrenamiento del modelo¶
 
@@ -23,13 +22,13 @@ wine_test <- wine[3751:4898, ]
 #wine_test$quality <- as.factor(wine_test$quality)
 
 ##
-## Se estima un árbol de regresión
+## Se estima un arbol de regresion
 ## install.packages("rpart")
 ##
 library(rpart)
 
 ##
-## la calidad es función de todas las variables
+## la calidad es funcion de todas las variables
 ## del data.frame
 ##
 m.rpart <- rpart(quality ~ ., data = wine_train)
@@ -37,26 +36,16 @@ m.rpart
 
 summary(m.rpart)
 
-## install.packages("rpart.plot")
-#library(rpart.plot)
-#rpart.plot(m.rpart, digits = 3)
-
-#rpart.plot(m.rpart,
-#           digits = 4,
-#           fallen.leaves = TRUE,
-#           type = 3,
-#           extra = 101)
-
-# Evaluación del modelo
+# Evaluacion del modelo
 
 ##
-## Pronóstico para la muestra de prueba
+## Pronostico para la muestra de prueba
 ##
 p.rpart <- predict(m.rpart, wine_test)
 
 ##
-## se compara la distribución de la salida
-## del árbol contra la salida real
+## se compara la distribucion de la salida
+## del arbol contra la salida real
 ##
 summary(p.rpart)
 
@@ -64,7 +53,7 @@ summary(wine_test$quality)
 
 ##
 ## se define el error medio absoluto para
-## evaluar el desempeño del modelo
+## evaluar el desempenio del modelo
 ##
 MAE <- function(actual, predicted) {
   mean(abs(actual - predicted))

@@ -1,18 +1,20 @@
+# Librería requerida para transformaciones JSON
+library(jsonlite)
+
 # Working Directory
-# setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 setwd("d:/Aplicaciones/R/wine-quality/")
 
 # Cargamos el modelo entrenado como una variable global
 load(file='winequality-model.RData')
 
 #' Servicio de entrenamiento calidad de vinos
-#' @get /quality-train
+#' @get /train
 function(){
   source('winequality-predict.R', encoding = 'UTF-8')
   return(accuracy)
 }
 
-#' Servicio de prediccion calidad de vinos
+#' Servicio de prediccion calidad de vinos con método HTTP GET
 #' @param fixed.acidity
 #' @param volatile.acidity
 #' @param citric.acid
@@ -24,7 +26,7 @@ function(){
 #' @param pH
 #' @param sulphates
 #' @param alcohol
-#' @get /quality-predict
+#' @get /predict
 function(fixed.acidity=0, volatile.acidity=0,
          citric.acid=0, residual.sugar=0,
          chlorides=0, free.sulfur.dioxide=0,
@@ -45,4 +47,18 @@ function(fixed.acidity=0, volatile.acidity=0,
 
   # Retornamos el valor de la prediccion
   return(as.character(p.rpart)[1])
+}
+
+#' Servicio de prediccion calidad de vinos con método HTTP POST
+#' @serializer contentType list(type='application/json')
+#' @post /predict-post
+function(req, res) {
+  # Construimos el data.frame con las variables de entrada
+  wine_test <- as.data.frame(fromJSON(req$postBody))
+
+  # Realizamos la prediccion correspondiente
+  p.rpart <- predict(m.rpart, wine_test)
+  
+  # Retornamos el valor de la prediccion
+  return(toJSON(p.rpart))
 }
