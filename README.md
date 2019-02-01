@@ -27,14 +27,15 @@ En el presente analisis se utiliza el set de vinos de calidad de vinos blancos, 
 ## Dependencias del proyecto **R**
 * rpart
 * jsonlite
+* base64enc
 * plumber
 ```
-install.packages(c('rpart', 'jsonlite', 'plumber'))
+install.packages(c('rpart', 'jsonlite', 'base64enc', 'plumber'))
 ```
 
 ## Endpoints del servicio predictivo
 
-### /train (GET)
+### /train-get (GET)
 Ejecuta el script de entrenamiento del modelo predictivo para calidad de vinos. A continuación un ejemplo del resultado del servicio, donde presenta la precisión (Accuracy) del entrenamiento:
 ```
 [
@@ -42,10 +43,10 @@ Ejecuta el script de entrenamiento del modelo predictivo para calidad de vinos. 
 ]
 ```
 
-### /predict (GET)
+### /predict-get (GET)
 Realiza la predicción de la calidad de un vino según las características de prueba ingresadas en los parámetros GET. A continuación se presentan los parámetros de entrada para el consumo:
 ```
-/predict?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8
+/predict-get?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8
 ```
 
 Finalmente, se presenta el resultado del servicio para predicción de un ejemplo de prueba. El valor resultado corresponde a un número entre 1 y 10 que representa la calidad del vino:
@@ -96,6 +97,23 @@ Finalmente, se presenta el resultado del servicio para predicción de dos ejempl
 ]
 ```
 
+## Autenticación del servicio (Authorization Header)
+El servicio tiene activada la opción de *Basic Auth* la cual permite, a través de un usuario y contraseña, agregar un primer nivel de seguridad. Para utilizar este tipo de autenticación debe crear 2 variables de ambiente para que el servicio pueda comparar y permitir el acceso:
+
+### Linux
+```
+export BASIC_USER=admin
+export BASIC_PASS=admin
+```
+
+### Windows
+```
+set BASIC_USER=admin
+set BASIC_PASS=admin
+```
+
+**Nota:** Tenga en cuenta en el cliente del servicio o si prueba desde Postman enviar el header *Authorization* con el usuario y contraseña codificadas en base64.
+
 ## Despliegue del servicio predictivo
 A continuacion se presentará un ejemplo de despliegue o publicación del servicio predictivo en lenguaje R utilizando un servidor local (en la máquina del usuario) que permite intuir como será el comportamiento del servicio en un ambiente similar al productivo, por tanto, se utilizará el servidor de aplicaciones **NodeJS** con el complemento **PM2** para la ejecución de componentes en lenguaje R. Las siguientes son las instrucciones para la instalación del servidor de aplicaciones y los elementos requeridos en el proceso de despliegue.
 
@@ -114,7 +132,7 @@ sudo npm install -g pm2
 
 ### Publicación en PM2 del servicio predictivo
 ```
-pm2 start --interpreter="Rscript" Rscript d:/Aplicaciones/R/wine-quality/winequality-plumber.R
+pm2 start --interpreter="Rscript" Rscript d:/Aplicaciones/R/wine-quality/winequality-plumber.R 10080
 ```
 
 ### Instrucción de PM2 para listar los servicios
@@ -130,6 +148,12 @@ pm2 stop winequality-plumber
 ## Instrucción de PM2 para iniciar el servicio
 ```
 pm2 start winequality-plumber
+```
+
+## Instrucción de PM2 para reiniciar el servicio y comando para actualizar las variables de ambiente
+```
+pm2 restart winequality-plumber
+pm2 restart --update-env winequality-plumber
 ```
 
 ## Ejemplos consumo del servicio predictivo

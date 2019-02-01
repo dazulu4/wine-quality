@@ -6,8 +6,23 @@
 	},
 	"item": [
 		{
-			"name": "winequality-train",
+			"name": "winequality-train-get",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -15,7 +30,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:10080/train",
+					"raw": "http://127.0.0.1:10080/train-get",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -25,7 +40,7 @@
 					],
 					"port": "10080",
 					"path": [
-						"train"
+						"train-get"
 					],
 					"query": [
 						{
@@ -44,8 +59,23 @@
 			"response": []
 		},
 		{
-			"name": "winequality-predict",
+			"name": "winequality-predict-get",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -53,7 +83,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:10080/predict?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8",
+					"raw": "http://127.0.0.1:10080/predict-get?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -63,7 +93,7 @@
 					],
 					"port": "10080",
 					"path": [
-						"predict"
+						"predict-get"
 					],
 					"query": [
 						{
@@ -118,6 +148,21 @@
 		{
 			"name": "winequality-predict-post",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{

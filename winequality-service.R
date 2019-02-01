@@ -4,11 +4,16 @@ library(jsonlite)
 # Working Directory
 setwd("d:/Aplicaciones/R/wine-quality/")
 
+# Cargamos el modelo entrenado como una variable global como JSON
+#m.rpart.file <- "winequality-model.json"
+#m.rpart.json <- readChar(con = m.rpart.file, nchars = file.info(m.rpart.file)$size)
+#m.rpart <- unserializeJSON(txt = m.rpart.json)
+
 # Cargamos el modelo entrenado como una variable global
 load(file='winequality-model.RData')
 
 #' Servicio de entrenamiento calidad de vinos
-#' @get /train
+#' @get /train-get
 function(){
   source('winequality-predict.R', encoding = 'UTF-8')
   return(accuracy)
@@ -26,7 +31,7 @@ function(){
 #' @param pH
 #' @param sulphates
 #' @param alcohol
-#' @get /predict
+#' @get /predict-get
 function(fixed.acidity=0, volatile.acidity=0,
          citric.acid=0, residual.sugar=0,
          chlorides=0, free.sulfur.dioxide=0,
@@ -61,4 +66,32 @@ function(req, res) {
   
   # Retornamos el valor de la prediccion
   return(toJSON(p.rpart))
+}
+
+# Libreria requerida para codificación base64 
+library(base64enc)
+
+# Cargo variables de ambiente (basic auth)
+basic.auth <- Sys.getenv(c("BASIC_USER", "BASIC_PASS"))
+if(basic.auth["BASIC_USER"] == "" && basic.auth["BASIC_PASS"] == "") {
+  basic.user <- "admin"
+  basic.pass <- "admin"
+} else {
+  basic.user <- basic.auth["BASIC_USER"]
+  basic.pass <- basic.auth["BASIC_PASS"]
+}
+
+# Codificamos el usuario para autenticación base64 (basic auth)
+basic.auth.base64 <- paste("Basic ", base64encode(charToRaw(paste(basic.user, ":", basic.pass, sep=""))), sep="")
+
+# Filtro para autenticación Basic
+#* @filter checkAuth
+function(req, res){
+  if (is.null(req$HTTP_AUTHORIZATION) || 
+      !identical(req$HTTP_AUTHORIZATION, basic.auth.base64)){
+    res$status <- 401 # Unauthorized
+    return(list(error="Authentication required"))
+  } else {
+    plumber::forward()
+  }
 }

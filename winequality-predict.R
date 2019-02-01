@@ -10,7 +10,7 @@ wine <- read.csv("winequality-white.csv", sep = ";")
 
 # Metodologia
 
-# Entrenamiento del modelo¶
+# Entrenamiento del modelo
 
 ##
 ## conjuntos de entrenamiento y prueba
@@ -76,6 +76,14 @@ MAE(5.886933, wine_test$quality)
 ##
 ## Guardamos el accuracy del modelo
 accuracy <<- MAE(p.rpart, wine_test$quality)
+
+
+# Serializamos el objeto entrenado con JSON
+#m.rpart.json <- serializeJSON(m.rpart)
+
+# Guardamos el modelo entrenado como JSON
+#m.rpart.file <- "winequality-model.json"
+#writeChar(m.rpart.json, con=m.rpart.file)
 
 # Guardamos el modelo entrenado
 save(m.rpart, file='winequality-model.RData')
