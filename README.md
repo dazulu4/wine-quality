@@ -98,21 +98,12 @@ Finalmente, se presenta el resultado del servicio para predicción de dos ejempl
 ```
 
 ## Autenticación del servicio (Authorization Header)
-El servicio tiene activada la opción de *Basic Auth* la cual permite, a través de un usuario y contraseña, agregar un primer nivel de seguridad. Para utilizar este tipo de autenticación debe crear 2 variables de ambiente para que el servicio pueda comparar y permitir el acceso:
-
-### Ejemplo Linux
+El servicio tiene activada la opción de *Basic Auth* la cual permite, a través de un usuario y contraseña, agregar un primer nivel de seguridad. Las credenciales por defecto son:
 ```
-export BASIC_USER=admin
-export BASIC_PASS=admin
+USERNAME = admin
+PASSWORD = admin
 ```
-
-### Ejemplo Windows
-```
-set BASIC_USER=admin
-set BASIC_PASS=admin
-```
-
-**Nota:** Tenga en cuenta en el cliente del servicio o si prueba desde Postman enviar el header *Authorization* con el usuario y contraseña codificadas en base64.
+**Nota:** Tenga en cuenta en el cliente del servicio o si prueba desde Postman enviar el header *Authorization* con el usuario y contraseña codificadas en base64. Igualmente, tenga en consideración que estos atributos se deben pasar en los argumentos de ejecución del Script.
 
 ## Despliegue del servicio predictivo
 A continuacion se presentará un ejemplo de despliegue o publicación del servicio predictivo en lenguaje R utilizando un servidor local (en la máquina del usuario) que permite intuir como será el comportamiento del servicio en un ambiente similar al productivo, por tanto, se utilizará el servidor de aplicaciones **NodeJS** con el complemento **PM2** para la ejecución de componentes en lenguaje R. Las siguientes son las instrucciones para la instalación del servidor de aplicaciones y los elementos requeridos en el proceso de despliegue.
@@ -134,7 +125,7 @@ sudo npm install -g pm2
 
 ### Publicación en PM2 del servicio predictivo
 ```
-pm2 start --interpreter="Rscript" Rscript d:/Aplicaciones/R/wine-quality/winequality-plumber.R 10080
+pm2 start --interpreter="Rscript" Rscript "d:/Aplicaciones/R/wine-quality/winequality-plumber.R" "admin" "admin" "10080" "d:/Aplicaciones/R/wine-quality"
 ```
 
 ### Instrucción de PM2 para listar los servicios
