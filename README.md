@@ -100,13 +100,13 @@ Finalmente, se presenta el resultado del servicio para predicción de dos ejempl
 ## Autenticación del servicio (Authorization Header)
 El servicio tiene activada la opción de *Basic Auth* la cual permite, a través de un usuario y contraseña, agregar un primer nivel de seguridad. Para utilizar este tipo de autenticación debe crear 2 variables de ambiente para que el servicio pueda comparar y permitir el acceso:
 
-### Linux
+### Ejemplo Linux
 ```
 export BASIC_USER=admin
 export BASIC_PASS=admin
 ```
 
-### Windows
+### Ejemplo Windows
 ```
 set BASIC_USER=admin
 set BASIC_PASS=admin
@@ -116,6 +116,8 @@ set BASIC_PASS=admin
 
 ## Despliegue del servicio predictivo
 A continuacion se presentará un ejemplo de despliegue o publicación del servicio predictivo en lenguaje R utilizando un servidor local (en la máquina del usuario) que permite intuir como será el comportamiento del servicio en un ambiente similar al productivo, por tanto, se utilizará el servidor de aplicaciones **NodeJS** con el complemento **PM2** para la ejecución de componentes en lenguaje R. Las siguientes son las instrucciones para la instalación del servidor de aplicaciones y los elementos requeridos en el proceso de despliegue.
+
+**Nota:** Los comandos fueron creados para Linux Red Hat. Si requiere instalar los paquetes en otras implementaciones de linux, simplemente cambie *yum* por el gestor de paquetes del sistema operativo.
 
 ### Instalación de NodeJS para publicación del servicio
 ```
