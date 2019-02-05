@@ -1,6 +1,3 @@
-# Working Directory
-setwd("d:/Aplicaciones/R/wine-quality/")
-
 # Exploracion
 
 ## Carga y verificación de los datos

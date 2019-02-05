@@ -1,9 +1,6 @@
 # Librería requerida para transformaciones JSON
 library(jsonlite)
 
-# Working Directory
-setwd("d:/Aplicaciones/R/wine-quality/")
-
 # Cargamos el modelo entrenado como una variable global como JSON
 #m.rpart.file <- "winequality-model.json"
 #m.rpart.json <- readChar(con = m.rpart.file, nchars = file.info(m.rpart.file)$size)
@@ -71,18 +68,8 @@ function(req, res) {
 # Libreria requerida para codificación base64 
 library(base64enc)
 
-# Cargo variables de ambiente (basic auth)
-basic.auth <- Sys.getenv(c("BASIC_USER", "BASIC_PASS"))
-if(basic.auth["BASIC_USER"] == "" && basic.auth["BASIC_PASS"] == "") {
-  basic.user <- "admin"
-  basic.pass <- "admin"
-} else {
-  basic.user <- basic.auth["BASIC_USER"]
-  basic.pass <- basic.auth["BASIC_PASS"]
-}
-
 # Codificamos el usuario para autenticación base64 (basic auth)
-basic.auth.base64 <- paste("Basic ", base64encode(charToRaw(paste(basic.user, ":", basic.pass, sep=""))), sep="")
+basic.auth.base64 <- paste("Basic ", base64encode(charToRaw(paste(BASIC_USER, ":", BASIC_PASS, sep=""))), sep="")
 
 # Filtro para autenticación Basic
 #* @filter checkAuth
