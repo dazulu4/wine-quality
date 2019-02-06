@@ -17,7 +17,7 @@ if(length(args) == 4) {
   BASIC_PASS <<- args[2]
   PORT_NUMBER <<- strtoi(args[3])
 } else {
-  #stop(paste("Faltan parámetros de entrada", args, sep=": "))
+  #stop(paste("Faltan parÃ¡metros de entrada", args, sep=": "))
 }
 
 # Publicacion del servicio predictivo

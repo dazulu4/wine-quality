@@ -1,4 +1,4 @@
-# Librería requerida para transformaciones JSON
+# Libreria requerida para transformaciones JSON
 library(jsonlite)
 
 # Cargamos el modelo entrenado como una variable global como JSON
@@ -11,12 +11,12 @@ load(file='winequality-model.RData')
 
 #' Servicio de entrenamiento calidad de vinos
 #' @get /train-get
-function(){
-  source('winequality-predict.R', encoding = 'UTF-8')
-  return(accuracy)
-}
+#function(){
+#  source('winequality-predict.R', encoding = 'UTF-8')
+#  return(accuracy)
+#}
 
-#' Servicio de prediccion calidad de vinos con método HTTP GET
+#' Servicio de prediccion calidad de vinos con metodo HTTP GET
 #' @param fixed.acidity
 #' @param volatile.acidity
 #' @param citric.acid
@@ -51,7 +51,7 @@ function(fixed.acidity=0, volatile.acidity=0,
   return(as.character(p.rpart)[1])
 }
 
-#' Servicio de prediccion calidad de vinos con método HTTP POST
+#' Servicio de prediccion calidad de vinos con metodo HTTP POST
 #' @serializer contentType list(type='application/json')
 #' @post /predict-post
 function(req, res) {
@@ -65,13 +65,13 @@ function(req, res) {
   return(toJSON(p.rpart))
 }
 
-# Libreria requerida para codificación base64 
+# Libreria requerida para codificaciÃ³n base64 
 library(base64enc)
 
-# Codificamos el usuario para autenticación base64 (basic auth)
+# Codificamos el usuario para autenticaciÃ³n base64 (basic auth)
 basic.auth.base64 <- paste("Basic ", base64encode(charToRaw(paste(BASIC_USER, ":", BASIC_PASS, sep=""))), sep="")
 
-# Filtro para autenticación Basic
+# Filtro para autenticaciÃ³n Basic
 #* @filter checkAuth
 function(req, res){
   if (is.null(req$HTTP_AUTHORIZATION) || 

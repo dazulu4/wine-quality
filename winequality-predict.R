@@ -1,6 +1,6 @@
 # Exploracion
 
-## Carga y verificación de los datos
+## Carga y verificacion de los datos
 wine <- read.csv("winequality-white.csv", sep = ";")
 
 # hist(wine$quality)
@@ -10,7 +10,7 @@ wine <- read.csv("winequality-white.csv", sep = ";")
 # Entrenamiento del modelo
 
 ##
-## conjuntos de entrenamiento y prueba
+## Conjuntos de entrenamiento y prueba
 ##
 wine_train <- wine[1:3750, ]
 wine_test <- wine[3751:4898, ]
