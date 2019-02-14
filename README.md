@@ -98,10 +98,16 @@ Finalmente, se presenta el resultado del servicio para predicción de dos ejempl
 ```
 
 ## Autenticación del servicio (Authorization Header)
-El servicio tiene activada la opción de *Basic Auth* la cual permite, a través de un usuario y contraseña, agregar un primer nivel de seguridad. Las credenciales por defecto son:
+El servicio tiene activada la opción de *Basic Auth* la cual permite, a través de un usuario y contraseña, agregar un primer nivel de seguridad. Las credenciales deben ser creadas como variables de ambiente:
+#### Linux
 ```
-USERNAME = admin
-PASSWORD = admin
+export SURA_BASIC_USER=admin
+export SURA_BASIC_PASS=admin
+```
+#### Windows
+```
+set SURA_BASIC_USER=admin
+set SURA_BASIC_PASS=admin
 ```
 **Nota:** Tenga en cuenta en el cliente del servicio o si prueba desde Postman enviar el header *Authorization* con el usuario y contraseña codificadas en base64. Igualmente, tenga en consideración que estos atributos se deben pasar en los argumentos de ejecución del Script.
 
@@ -123,9 +129,14 @@ sudo npm install -g pm2
 
 **NOTA:** la instrucción *-g* se utiliza para instalación global de pm2, es decir, para todos los usuarios de la máquina.
 
+### Variable de ambiente para configuración de puerto
+```
+export SURA_APP_PORT=8000
+```
+
 ### Publicación en PM2 del servicio predictivo
 ```
-pm2 start --interpreter="Rscript" Rscript "d:/Aplicaciones/R/wine-quality/winequality-plumber.R" "admin" "admin" "10080" "d:/Aplicaciones/R/wine-quality"
+pm2 start --interpreter="Rscript" Rscript "d:/Aplicaciones/R/wine-quality/main.R" --name "winequality"
 ```
 
 ### Instrucción de PM2 para listar los servicios
@@ -135,19 +146,24 @@ pm2 list
 
 ## Instrucción de PM2 para detener el servicio
 ```
-pm2 stop winequality-plumber
+pm2 stop winequality
 ```
 
 ## Instrucción de PM2 para iniciar el servicio
 ```
-pm2 start winequality-plumber
+pm2 start winequality
 ```
 
 ## Instrucción de PM2 para reiniciar el servicio y comando para actualizar las variables de ambiente
 ```
-pm2 restart winequality-plumber
-pm2 restart --update-env winequality-plumber
+pm2 restart winequality
+pm2 restart --update-env winequality
+```
+
+## Instrucción de PM2 para desinstalar el servicio
+```
+pm2 uninstall winequality
 ```
 
 ## Ejemplos consumo del servicio predictivo
-El archivo [winequality-postman.json](https://github.com/dazulu4/wine-quality/blob/master/winequality-postman.json) contiene ejemplos para el consumo de los endpoints con el fin de que pueda realizar pruebas de los mismos. Debe instalar la herramienta [Postman](https://www.getpostman.com/downloads/) e importar el archivo indicado para ejecutar el ejemplo de consumo de los 3 servicios publicados.
+El archivo [data/postman.json](https://github.com/dazulu4/wine-quality/blob/master/data/postman.json) contiene ejemplos para el consumo de los endpoints con el fin de que pueda realizar pruebas de los mismos. Debe instalar la herramienta [Postman](https://www.getpostman.com/downloads/) e importar el archivo indicado para ejecutar el ejemplo de consumo de los 3 servicios publicados.
