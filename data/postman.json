@@ -6,59 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "winequality-train-get",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "admin",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "admin",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://127.0.0.1:10080/train-get",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "10080",
-					"path": [
-						"train-get"
-					],
-					"query": [
-						{
-							"key": "clave",
-							"value": "valor",
-							"disabled": true
-						},
-						{
-							"key": "otra",
-							"value": "otro",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "winequality-predict-get",
 			"request": {
 				"auth": {
@@ -83,7 +30,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:10080/predict-get?fixed.acidity=0&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.045&free.sulfur.dioxide=2&total.sulfur.dioxide=54&density=0.001&pH=1&sulphates=0.01&alcohol=3.8",
+					"raw": "http://127.0.0.1:8000/predict-get?fixed.acidity=10&volatile.acidity=0.27&citric.acid=0.15&residual.sugar=12.5&chlorides=0.45&free.sulfur.dioxide=2&total.sulfur.dioxide=12&density=0.001&pH=1&sulphates=0.1&alcohol=1.8",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -91,14 +38,14 @@
 						"0",
 						"1"
 					],
-					"port": "10080",
+					"port": "8000",
 					"path": [
 						"predict-get"
 					],
 					"query": [
 						{
 							"key": "fixed.acidity",
-							"value": "0"
+							"value": "10"
 						},
 						{
 							"key": "volatile.acidity",
@@ -114,7 +61,7 @@
 						},
 						{
 							"key": "chlorides",
-							"value": "0.045"
+							"value": "0.45"
 						},
 						{
 							"key": "free.sulfur.dioxide",
@@ -122,7 +69,7 @@
 						},
 						{
 							"key": "total.sulfur.dioxide",
-							"value": "54"
+							"value": "12"
 						},
 						{
 							"key": "density",
@@ -134,11 +81,11 @@
 						},
 						{
 							"key": "sulphates",
-							"value": "0.01"
+							"value": "0.1"
 						},
 						{
 							"key": "alcohol",
-							"value": "3.8"
+							"value": "1.8"
 						}
 					]
 				}
@@ -176,7 +123,7 @@
 					"raw": "[\n    {\n        \"fixed.acidity\": 0,\n        \"volatile.acidity\": 0.27,\n        \"citric.acid\": 0.15,\n        \"residual.sugar\": 12.5,\n        \"chlorides\": 0.045,\n        \"free.sulfur.dioxide\": 2,\n        \"total.sulfur.dioxide\": 54,\n        \"density\": 0.001,\n        \"pH\": 1,\n        \"sulphates\": 0.01,\n        \"alcohol\": 3.8\n    },\n    {\n        \"fixed.acidity\": 0.1,\n        \"volatile.acidity\": 1.5,\n        \"citric.acid\": 0.05,\n        \"residual.sugar\": 1.5,\n        \"chlorides\": 1.45,\n        \"free.sulfur.dioxide\": 6,\n        \"total.sulfur.dioxide\": 10,\n        \"density\": 0.1,\n        \"pH\": 0.5,\n        \"sulphates\": 0.02,\n        \"alcohol\": 1.9\n    }\n]"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:10080/predict-post",
+					"raw": "http://127.0.0.1:8000/predict-post",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -184,7 +131,7 @@
 						"0",
 						"1"
 					],
-					"port": "10080",
+					"port": "8000",
 					"path": [
 						"predict-post"
 					]

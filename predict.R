@@ -1,7 +1,7 @@
 # Exploracion
 
 ## Carga y verificacion de los datos
-wine <- read.csv("winequality-white.csv", sep = ";")
+wine <- read.csv("data/data.csv", sep = ";")
 
 # hist(wine$quality)
 
@@ -73,7 +73,7 @@ MAE(5.886933, wine_test$quality)
 ##
 ## Guardamos el accuracy del modelo
 accuracy <<- MAE(p.rpart, wine_test$quality)
-
+print(paste("Accuracy:", accuracy, sep=" "))
 
 # Serializamos el objeto entrenado con JSON
 #m.rpart.json <- serializeJSON(m.rpart)
@@ -83,4 +83,38 @@ accuracy <<- MAE(p.rpart, wine_test$quality)
 #writeChar(m.rpart.json, con=m.rpart.file)
 
 # Guardamos el modelo entrenado
-save(m.rpart, file='winequality-model.RData')
+save(m.rpart, file='model/model.RData')
+
+
+
+
+#' Servicio de entrenamiento calidad de vinos
+#' @get /train-get
+#function(){
+#  source('winequality-predict.R', encoding = 'UTF-8')
+#  return(accuracy)
+#}
+
+# Lectura argumentos de ejecucion
+#args <- commandArgs(trailingOnly=TRUE)
+#if(length(args) == 4) {
+#  WORKING_DIR <<- args[4]
+#  BASIC_USER <<- args[1]
+#  BASIC_PASS <<- args[2]
+#  PORT_NUMBER <<- strtoi(args[3])
+#} else {
+  #stop(paste("Faltan parámetros de entrada", args, sep=": "))
+#}
+
+# Working Directory
+#setwd("d:/Aplicaciones/R/wine-quality/")
+
+# Cargo variables de ambiente (basic auth)
+#basic.auth <- Sys.getenv(c("BASIC_USER", "BASIC_PASS"))
+#if(basic.auth["BASIC_USER"] == "" && basic.auth["BASIC_PASS"] == "") {
+#  basic.user <- "admin"
+#  basic.pass <- "admin"
+#} else {
+#  basic.user <- basic.auth["BASIC_USER"]
+#  basic.pass <- basic.auth["BASIC_PASS"]
+#}

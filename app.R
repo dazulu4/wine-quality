@@ -1,20 +1,8 @@
 # Libreria requerida para transformaciones JSON
 library(jsonlite)
 
-# Cargamos el modelo entrenado como una variable global como JSON
-#m.rpart.file <- "winequality-model.json"
-#m.rpart.json <- readChar(con = m.rpart.file, nchars = file.info(m.rpart.file)$size)
-#m.rpart <- unserializeJSON(txt = m.rpart.json)
-
 # Cargamos el modelo entrenado como una variable global
-load(file='winequality-model.RData')
-
-#' Servicio de entrenamiento calidad de vinos
-#' @get /train-get
-#function(){
-#  source('winequality-predict.R', encoding = 'UTF-8')
-#  return(accuracy)
-#}
+load(file='model/model.RData')
 
 #' Servicio de prediccion calidad de vinos con metodo HTTP GET
 #' @param fixed.acidity
@@ -69,7 +57,7 @@ function(req, res) {
 library(base64enc)
 
 # Codificamos el usuario para autenticación base64 (basic auth)
-basic.auth.base64 <- paste("Basic ", base64encode(charToRaw(paste(BASIC_USER, ":", BASIC_PASS, sep=""))), sep="")
+basic.auth.base64 <- paste("Basic ", base64encode(charToRaw(paste(basic.user, ":", basic.pass, sep=""))), sep="")
 
 # Filtro para autenticación Basic
 #* @filter checkAuth
